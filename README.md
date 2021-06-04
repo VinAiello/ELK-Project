@@ -27,8 +27,8 @@ We set up our virtual machines in a way in which only the Jumpbox would be allow
 * Our containers within our Web 1 and Web 2 machines are only accessible by our Jumpbox host machine.
 * Our ELK Server is only accessible by our containers.
 
-|   |   |   |   |   |
-|---|---|---|---|---|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+| Name  | Publicly Accessible | Allowed IP Addresses  |
+|---|---|---|
+| Jumpbox Provisioner  | Yes  | 10.0.0.6  |
+| Web 1  | No  | 10.0.0.7  |
+| Web 2 | No  | 10.0.0.8  |
