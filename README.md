@@ -21,3 +21,6 @@ Integrating the ELK server into our network provides very useful monitoring and 
 | Web 1  |  Server | 10.0.0.7  | Linux  |   |
 | Web 2  |  Server | 10.0.0.8  | Linux |   |
 |Elk Server | ELK Stack | 10.1.0.4 | Linux | | |
+
+# Access Policies
+We set up our virtual machines in a way in which only the Jumpbox would be allowed connections to the internet.
