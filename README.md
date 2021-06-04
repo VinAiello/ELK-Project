@@ -17,6 +17,6 @@ Integrating the ELK server into our network provides very useful monitoring and 
 
 | Name  | Function   | IP Address  | Operating System  | |
 |---|---|---|---|---|
-|   |   |   |   |   |
+|  JumpBox Provisioner | Gateway   | 10.0.0.6  |  Linux |   |
 |   |   |   |   |   |
 |   |   |   |   |   |
