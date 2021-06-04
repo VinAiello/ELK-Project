@@ -32,3 +32,5 @@ We set up our virtual machines in a way in which only the Jumpbox would be allow
 | Jumpbox Provisioner  | Yes  | 10.0.0.6  |
 | Web 1  | No  | 10.0.0.7  |
 | Web 2 | No  | 10.0.0.8  |
+| ELK Server | No | 10.1.0.4 |
+
