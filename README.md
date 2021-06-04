@@ -34,3 +34,5 @@ We set up our virtual machines in a way in which only the Jumpbox would be allow
 | Web 2 | No  | 10.0.0.8  |
 | ELK Server | No | 10.1.0.4 |
 
+# ELK Server Configuration
+We were able to deploy and configure our ELK Server machine using Ansible, which automated the process.
