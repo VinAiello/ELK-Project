@@ -15,7 +15,7 @@ Integrating the ELK server into our network provides very useful monitoring and 
 * We installed Filebeat for its capability to help log data and send it to Logstash and Elasticsearch, the E and the L in our ELK Stack.
 * Metricbeat was installed next for it's ability to gather and log metrics from the services running and is able to provide Logstash and Elasticseaech with the statistics it's collected.
 
-| ## Name  | ## Function   |   |   |   |
+| Name  | Function   | IP Address  | Operating System  |
 |---|---|---|---|---|
 |   |   |   |   |   |
 |   |   |   |   |   |
