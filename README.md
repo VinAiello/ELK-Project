@@ -16,7 +16,7 @@ Integrating the ELK server into our network provides very useful monitoring and 
 * Metricbeat was installed next for it's ability to gather and log metrics from the services running and is able to provide Logstash and Elasticseaech with the statistics it's collected.
 
 | Name  | Function   | IP Address  | Operating System  | |
-|---|---|---|---|---|
+|---|---|---|---|
 |  JumpBox Provisioner | Gateway   | 10.0.0.6  |  Linux |   |
 | Web 1  |  Container | 10.0.0.7  | Linux  |   |
 | Web 2  |  Container | 10.0.0.8  | Linux |   |
