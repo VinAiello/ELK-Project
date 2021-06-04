@@ -18,9 +18,12 @@ Integrating the ELK server into our network provides very useful monitoring and 
 | Name  | Function   | IP Address  | Operating System  | |
 |---|---|---|---|---|
 |  JumpBox Provisioner | Gateway   | 10.0.0.6  |  Linux |   |
-| Web 1  |  Server | 10.0.0.7  | Linux  |   |
-| Web 2  |  Server | 10.0.0.8  | Linux |   |
+| Web 1  |  Container | 10.0.0.7  | Linux  |   |
+| Web 2  |  Container | 10.0.0.8  | Linux |   |
 |Elk Server | ELK Stack | 10.1.0.4 | Linux | | |
 
 # Access Policies
-We set up our virtual machines in a way in which only the Jumpbox would be allowed connections to the internet.
+We set up our virtual machines in a way in which only the Jumpbox would be allowed connections to the internet, so our Web 1 and Web 2 machines are more secure.
+* Our containers within our Web 1 and Web 2 machines are only accessible by our Jumpbox host machine.
+* Our ELK Server is only accessible by our containers.
+
