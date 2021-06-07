@@ -42,4 +42,5 @@ Next we created our actual Virtual Network within our RedTeamRG group, which I n
 * Placing a Virtual Network within our resource group, allows us the option to either make another separate network within the same resource group, or having another resource group completely to establish for a different purpose or department within an organization.
 * When we are setting up RedTeamNet, we want to make sure we are choosing the option to assign it an IPv4 address space, in our case it was 10.0.0.0/16.
 * We also opted to keep the Security options disabled for this project, to ensure we did not deplete too much of our funds, those these options will usually be important settings to enable in many regular networks.
+* To finish creating our virtual network, we need to make sure we are clicking "Review + Create" and then wait for the network to be deployed within our resource group.
 
