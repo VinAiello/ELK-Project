@@ -37,6 +37,7 @@ We set up our virtual machines in a way in which only the Jumpbox would be allow
 # Starting Our Virtual Network
 We began our Virtual Networks by creating a Resource Group within Azure, in my example I named it RedTeamRG.
 * This acts as the space in which we will establish our Virtual Networks, and deploy the rest of our resources within Azure.
+
 Next we created our actual Virtual Network within our RedTeamRG group, which I named RedTeamNet.
 * Placing a Virtual Network within our resource group, allows us the option to either make another separate network within the same resource group, or having another resource group completely to establish for a different purpose or department within an organization.
 * When we are setting up RedTeamNet, we want to make sure we are choosing the option to assign it an IPv4 address space, in our case it was 10.0.0.0/16.
