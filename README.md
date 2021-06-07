@@ -43,4 +43,10 @@ Next we created our actual Virtual Network within our RedTeamRG group, which I n
 * When we are setting up RedTeamNet, we want to make sure we are choosing the option to assign it an IPv4 address space, in our case it was 10.0.0.0/16.
 * We also opted to keep the Security options disabled for this project, to ensure we did not deplete too much of our funds, those these options will usually be important settings to enable in many regular networks.
 * To finish creating our virtual network, we need to make sure we are clicking "Review + Create" and then wait for the network to be deployed within our resource group.
+* You should be able to see RedTeamNet within our RedTeamRG now.
 
+# Establishing a Security Group
+Security groups within cloud based networks, are similar to firewalls within physical networks. They will allow us to set rules and regulate what kind of traffic makes it through to our network and resources.
+* In Azure, we will look up the option Securty Groups and create a new one which we will name RedTeam-SG.
+* Within this group, like mentioned, we will be able to start setting rules to specify how we want traffic to be able to transfer in and out.
+* 
