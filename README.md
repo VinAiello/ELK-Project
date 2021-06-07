@@ -49,4 +49,9 @@ Next we created our actual Virtual Network within our RedTeamRG group, which I n
 Security groups within cloud based networks, are similar to firewalls within physical networks. They will allow us to set rules and regulate what kind of traffic makes it through to our network and resources.
 * In Azure, we will look up the option Securty Groups and create a new one which we will name RedTeam-SG.
 * Within this group, like mentioned, we will be able to start setting rules to specify how we want traffic to be able to transfer in and out.
-* 
+
+Next we want to create our first rule, which will be used to block all traffic to our virtual network. This keep our netowrk secure until we are finished properly configuring it to our standards.
+* We want to select our new RedTeam-SG and select the option to create an inbound rule. 
+* We can select "Any" for the source to block all traffic, and then we want to keep the wildcard in the "Source Port Ranges" portion. The port will be random so there will be no need to change it.
+* In the "Destination" option, we will select "Any" again and it will block all destination ports. We want to keep all of our destination ports blocked as well, so we can keep the wildcard in that portion as well.
+* For the "Action" portion, we can select "Block" because we want this rule to block traffic. Azure reads rules from lowest number to highest, with the highest priority being 4096 for custom rules. We will set this rule as 4096 for priority, as we want our following rules that we create to be able supersede this rule. 
