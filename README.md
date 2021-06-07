@@ -54,4 +54,6 @@ Next we want to create our first rule, which will be used to block all traffic t
 * We want to select our new RedTeam-SG and select the option to create an inbound rule. 
 * We can select "Any" for the source to block all traffic, and then we want to keep the wildcard in the "Source Port Ranges" portion. The port will be random so there will be no need to change it.
 * In the "Destination" option, we will select "Any" again and it will block all destination ports. We want to keep all of our destination ports blocked as well, so we can keep the wildcard in that portion as well.
-* For the "Action" portion, we can select "Block" because we want this rule to block traffic. Azure reads rules from lowest number to highest, with the highest priority being 4096 for custom rules. We will set this rule as 4096 for priority, as we want our following rules that we create to be able supersede this rule. 
+* For the "Action" portion, we can select "Block" because we want this rule to block traffic. Azure follows rules from lowest number to highest, with the highest priority being 4096 for custom rules. We will set this rule as 4096 for priority, as we want our following rules that we create to be able supersede this rule. This will be named our Default-Deny rule.
+
+
