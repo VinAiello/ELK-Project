@@ -59,5 +59,4 @@ Next we want to create our first rule, which will be used to block all traffic t
 ## Our Virtual Machines
 Our first VM that we will set up will be our JumpBox and it will be our gateway to the other virtual machines we will set up later.
 * We want to make sure we are using an SSH key to access these machines, as it will be a more secure way to access them than it would be just using a password.
-
-[^1]: If we don't already have a public key created, we can run the command "ssh-keygen" in our terminal.
+###### If we don't already have a public key created, we can run the command "ssh-keygen" in our terminal.
