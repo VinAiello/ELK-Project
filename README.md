@@ -67,4 +67,4 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 * For the "Image" selection, we will select the Ubuntu Server 18.04 option, and for the "Size" we can use the "Standard - B1s" which will have 1 CPU and 1 RAM, enough power for what we need in this VM.
 * Next, down where it says "Authentication Type" we want o make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
  ###### We get this by going back to our terminal and running the command, cat ~/.ssh./id_rsa.pub, which should display our public key.
-* 
+* We can ignore the port settings, as they will be configured by our security group.
