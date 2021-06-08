@@ -57,5 +57,6 @@ Next we want to create our first rule, which will be used to block all traffic t
 * For the "Action" portion, we can select "Block" because we want this rule to block traffic. Azure follows rules from lowest number to highest, with the highest priority being 4096 for custom rules. We will set this rule as 4096 for priority, as we want our following rules that we create to be able supersede this rule. This will be named our Default-Deny rule.
 
 ## Our Virtual Machines
-Our first VM that we will set up will be our JumpBox and will be our gateway to the other virtual machines we will set up later.
-*
+Our first VM that we will set up will be our JumpBox and it will be our gateway to the other virtual machines we will set up later.
+* We want to make sure we are using an SSH key to access these machines, as it will be a more secure way to access them than it would be just using a password.
+** If we don't already have a public key created, we can run the command ssh-keygen in our terminal.
