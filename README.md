@@ -58,6 +58,10 @@ Next we want to create our first rule, which will be used to block all traffic t
 
 ## Our Virtual Machines
 Our first VM that we will set up will be our JumpBox and it will be our gateway to the other virtual machines we will set up later.
-* We want to make sure we are using an SSH key to access these machines, as it will be a more secure way to access them than it would be just using a password.
-###### If we don't already have keys created, we can run the command "ssh-keygen" in our terminal.
+* First we want to make sure we are using an SSH key to access these machines, as it will be a more secure way to access them than it would be just using a password.
+###### If we don't already have a key pair created, we can run the command "ssh-keygen" in our terminal.
 ###### We want to specify this folder to have the keys placed in, "/.ssh/id_rsa/".
+* Now in Azure, we want to search for the "Virtual Machine" option and click "Add" so that we can start our first machine.
+* We want to make sure we are placing this VM in our previously made resource group, so in that option make sure we specify our RedTeamRG. 
+* We want to name our first VM something that will make it easy to identify, so I have named mine "Jump-Box-Provisioner".
+* 
