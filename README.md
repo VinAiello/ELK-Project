@@ -68,3 +68,6 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 * Next, down where it says "Authentication Type" we want o make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
  ###### We get this by going back to our terminal and running the command, cat ~/.ssh./id_rsa.pub, which should display our public key.
 * We can ignore the port settings, as they will be configured by our security group.
+* In the Networking tab, we want to select the virtual network we created, RedTeamNet, which will assign our VM a Private IP address, and we will keep the Public IP as default.
+* We want to make sure we are selecting the "Advanced" option in the area that asks for "NIC ntwork security group" and select the security group we created, RedTeam-SG, for our VM to be a part of.
+* We can keep the rest of the settings as default, and finish with Review and Create again to finalize the VM. 
