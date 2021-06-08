@@ -72,4 +72,4 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 * We want to make sure we are selecting the "Advanced" option in the area that asks for "NIC ntwork security group" and select the security group we created, RedTeam-SG, for our VM to be a part of.
 * We can keep the rest of the settings as default, and finish with Review and Create again to finalize the VM. 
 * For our other 2 VM's we will make, named Web-1 & Web-2, we will be doing the same steps for each except for a couple variations:
-1 In 
+1. In 
