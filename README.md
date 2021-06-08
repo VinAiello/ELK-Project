@@ -75,3 +75,7 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 1. In the drop down for "Availability Options" we want to select "Availability Set" this time, then click "Create New". We will keep the default options and then name is RedTeamAS.
 2. For the "Image" option, we will be using a different selection, this time it should be **Standard-B1ms** which will be 1 CPU and 2 RAM for these VM's.
 3. We want to make sure we do not select for these 2 new VM's to have public IP addresses.
+
+## Configuring the JumpBox
+We want to configure our Jumpbox now by adding some rules to the security group we created.
+* 
