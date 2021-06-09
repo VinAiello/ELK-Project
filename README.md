@@ -84,3 +84,25 @@ After you complete this rule, you can test the rule by powering up you Jumpbox V
 ###### The VM's public IP should be listed in Azure when you select the VM.
 ###### Our public IP might change depending on wi-fi settings or what wi-fi networks we are connected to, so if you have issues down the line connecting, you may want to double check this and see if your rule may need editing.
 
+## Setting Up Containers
+We want to configure our Jumpbox further by allowing it to run containers from Docker and install these containers. 
+###### Make sure to install docker in your terminal if it is not already, run *sudo apt install docker.io*. Then verify it is running with *sudo systemctl status docker*. If it is not running, use *sudo systemctl start docker*.
+* Now we want to use the Ansible container so we will run *sudo docker pull cyberxsecurity/ansible* to locate and pull that container from docker.
+* Now to launch Ansible we use *docker run -ti cyberxsecurity/ansible:latest bash*. We can exit after we run this command.
+We now want to make sure that our Jumpbox can SSH in our virtual network we created, so we will create a new inbound rule in our virtual network.
+* The source should be IP Addresses again, and we will input the private IP of our Jumpbox, we can once again find this by selecting on our Jumpbox VM in Azure.
+* Source port ranges will be Any again, the destination will VirtualNetwork this time, and destination port will be 22 for SSH again.
+* Protocol will be any, action will be allow to allow traffic, make priority another lower number than our Default Deny rule, and create another name for this rule to make it easy to tell what it is doing for our cloud network.
+
+## Setting Up Provisioners
+We will be jumping back into our terminal to start setting up our provisioners.
+* We want to run *sudo docker container list -a* to list our our ansible containers. We will run *docker run -it cyberxsecurity/ansible /bin/bash* next to start it up and connect to it. This should drop us into another shell.
+* We want to next create another SSH key pair to allow secure access. In our new container shell run the *ssh-keygen* command again, and then *ls .ssh/* to list them out.
+* We will cat out our public key again using *cat .ssh/id_rsa.pub* and we want to copy this key again.
+* Back in Azure, we will select our Web-1 VM and we want to make sure we are using these keys to verify access when we SSH. In the Reset password tab, we select Reset SSH public key instead, use our username, RedAdmin in our case, and paste the public key.
+* We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
+Next we need to do some further configuring to our Ansible containers.
+* Navigate to the ansible file with *ls /etc/ansible*. We will open the hosts file with nano, and Web-1's private IP to the file headers.
+###### Uncomment the *webservers* header and add it there, along with this python line, *ansible_python_interpreter=/usr/bin/python3*
+We now want to make sure our admin account will be used for SSH connections.
+* Navigate to the ansible.cfg file and add your admin account name to the *remote_user =* portion. 
