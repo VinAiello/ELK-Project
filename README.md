@@ -82,4 +82,5 @@ We want to configure our Jumpbox now by adding some rules to the security group 
 * Reminder, we need to set the priority lower than our default deny rule, lower than 4096, and this rule should allow all traffic from our source IP.
 After you complete this rule, you can test the rule by powering up you Jumpbox VM, and in your terminal running the command *ssh admin-username@VM-public-IP*
 ###### The VM's public IP should be listed in Azure when you select the VM.
+###### Our public IP might change depending on wi-fi settings or what wi-fi networks we are connected to, so if you have issues down the line connecting, you may want to double check this and see if your rule may need editing.
 
