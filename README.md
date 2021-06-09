@@ -77,5 +77,9 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 3. We want to make sure we do not select for these 2 new VM's to have public IP addresses.
 
 ## Configuring the JumpBox
-We want to configure our Jumpbox now by adding some rules to the security group we created.
-* 
+We want to configure our Jumpbox now by adding some rules to the security group we created. 1st we wanted to make sure that we allowed our IP address to be able to SSH to our Jumpbox VM.
+* We created an inbound rule selecting IP Addresses as a source, the source IP being our public IP, any source port ranges, selecting IP as the destination, destination port range should be port 22 for SSH connection, and the destination IP being the private IP of our Jumpbox.
+* Reminder, we need to set the priority lower than our default deny rule, lower than 4096, and this rule should allow all traffic from our source IP.
+After you complete this rule, you can test the rule by powering up you Jumpbox VM, and in your terminal running the command *ssh admin-username@VM-public-IP*
+###### The VM's public IP should be listed in Azure when you select the VM.
+
