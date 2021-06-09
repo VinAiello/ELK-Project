@@ -113,6 +113,7 @@ We now wanto establish DVWA web app on our VM's.
 * We will create a playbook within the ansible file, to configure within, and it will be a YAML file.
 [Yaml header screenshot]
 * We want our full playbook to look like the image below.
+
  ![image](https://user-images.githubusercontent.com/78758609/121428185-c1afbe00-c932-11eb-9ed8-0cb662c8ffc7.png)
 
 ###### This will make sure it downloads python3-pip, docker.io, the cyberxsecurity/dvwa docker container, and it will make sure that when you restart your VM that the container will restart too.
