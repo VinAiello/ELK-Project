@@ -112,7 +112,10 @@ We now wanto establish DVWA web app on our VM's.
 * If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use *docker container list -a* to list out our containers. We will connect to the ansible container by running *docker start [name of container]* to start it up, and then *docker attach [name of container]* to connect. 
 * We will create a playbook within the ansible file, to configure within, and it will be a YAML file.
 [Yaml header screenshot]
-* We also want to make sure the playbook includes configuration to install docker.io and python3-pip.
+* We want our full playbook to look like the image below.
  ![image](https://user-images.githubusercontent.com/78758609/121428185-c1afbe00-c932-11eb-9ed8-0cb662c8ffc7.png)
 
-* 
+###### This will make sure it downloads python3-pip, docker.io, the cyberxsecurity/dvwa docker container, and it will make sure that when you restart your VM that the container will restart too.
+
+* We can test everything is running correctly by trying to SSH to container and running the command *curl localhost/setup.php*. 
+
