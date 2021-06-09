@@ -106,3 +106,7 @@ Next we need to do some further configuring to our Ansible containers.
 ###### Uncomment the *webservers* header and add it there, along with this python line, *ansible_python_interpreter=/usr/bin/python3*
 We now want to make sure our admin account will be used for SSH connections.
 * Navigate to the ansible.cfg file and add your admin account name to the *remote_user =* portion. 
+
+## DVWA
+We now wanto establish DVWA web app on our VM's.
+* If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use *docker container list -a* to list out our containers. We will connect to the ansible container by running *docker start [name of container]* to start it up, and then *docker attach [name of container]* to connect.
