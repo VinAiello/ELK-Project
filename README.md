@@ -109,4 +109,10 @@ We now want to make sure our admin account will be used for SSH connections.
 
 ## DVWA
 We now wanto establish DVWA web app on our VM's.
-* If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use *docker container list -a* to list out our containers. We will connect to the ansible container by running *docker start [name of container]* to start it up, and then *docker attach [name of container]* to connect.
+* If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use *docker container list -a* to list out our containers. We will connect to the ansible container by running *docker start [name of container]* to start it up, and then *docker attach [name of container]* to connect. 
+* We will create a playbook within the ansible file, to configure within, and it will be a YAML file.
+---
+- name: Config Web VM with Docker
+    hosts: web
+    become: true
+    tasks:
