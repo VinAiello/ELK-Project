@@ -138,4 +138,12 @@ We want to make a few more security measures to ensure proper access is allowed 
 * We can then test that our load balancer and backened pool are working by shutting down our Web-1 VM and trying to load the link, and then again having Web-1 back on and shutting down our Web-2 VM.
 
 ## Starting Our ELK Stack
+We want to implement the ELK stack into our cloud network now so that we can have access to logging of data, analytics, and monitoring of our network. We will start by creating another virtual network to host the stack on.
+###### ELK stack includes Elasticsearch, Logstash, and Kibana as the tools used.
+* This new virtual network will be within our same resource group, and this time we are going to use a different region to place it in, to help keep it separate from our other resouces.
+* If we check in the "**IP Addresses**" tab, we should double check that Azure made a different network space for us with a different assigned IP range than for our other network.
+* After the ELK virtual network has been created, we will set up a peer connection between our virtual networks in the "**Peerings**" tab, which will allow traffic to pass between both networks.
 
+## Our ELK VM
+After setting up the peering between the networks, we want to create a new VM that will host our ELK tools.
+* We will start back in our terminal
