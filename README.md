@@ -132,4 +132,7 @@ The next step is getting our load balancers set up to help support our DVWA.
 ## Further Configuration
 We want to make a few more security measures to ensure proper access is allowed now, while still ensuring the security of our network.
 * We will create a load balancer rule to allow TCP between the laod balancer and our security group, this will be through port 80.
-* 
+* In addition, we want to add a new security group rule for traffic from the internet to be able to reach our virtual network through port 80. We want to make sure it is from our public IP to the VirtualNetwork when we are creating the rule.
+* We can now delete our **Default Deny** rule now that we have put in enough rules and configuration to provide sufficient access and control. 
+* We can now test that our DVWA is accessible on the internet by running "**http://[load balancer public IP]/setup.php**"
+
