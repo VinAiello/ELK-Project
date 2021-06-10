@@ -135,4 +135,6 @@ We want to make a few more security measures to ensure proper access is allowed 
 * In addition, we want to add a new security group rule for traffic from the internet to be able to reach our virtual network through port 80. We want to make sure it is from our public IP to the VirtualNetwork when we are creating the rule.
 * We can now delete our **Default Deny** rule now that we have put in enough rules and configuration to provide sufficient access and control. 
 * We can now test that our DVWA is accessible on the internet by running "**http://[load balancer public IP]/setup.php**" in a browser.
+* We can then test that our load balancer and backened pool are working by shutting down our Web-1 VM and trying to load the link, and then again having Web-1 back on and shutting down our Web-2 VM.
+* 
 
