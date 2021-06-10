@@ -128,4 +128,6 @@ The next step is getting our load balancers set up to help support our DVWA.
 * "**Assignment**" will be Static and we will not need an IPv6 address for it.
 * Atfer the load balancer has been reviewed and created, we will want to help it monitor that our VM's are able to receive traffic, so we will add a health probe to it.
 * Next we will add a backend pool to connect our VM servers to the load balancer, specifying that they will have the traffic balanced between them. We want to make sure it is connected to the virtual network we created previously and that we are specifying the private IP's of our Web-1 and Web-2 VM's.
-* 
+
+## Further Configuration
+We want to make a few more security measures to ensure proper access is allowed now, while still ensuring the security of our network.
