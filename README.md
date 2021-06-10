@@ -131,3 +131,5 @@ The next step is getting our load balancers set up to help support our DVWA.
 
 ## Further Configuration
 We want to make a few more security measures to ensure proper access is allowed now, while still ensuring the security of our network.
+* We will create a load balancer rule to allow TCP between the laod balancer and our security group, this will be through port 80.
+* 
