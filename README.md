@@ -63,7 +63,7 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 ###### We want to specify this folder to have the keys placed in, "/.ssh/id_rsa/".
 * Now in Azure, we want to search for the "Virtual Machine" option and click "Add" so that we can start our first machine.
 * We want to make sure we are placing this VM in our previously made resource group, so in that option make sure we specify our RedTeamRG. 
-* We want to name our first VM something that will make it easy to identify, so I have named mine "Jump-Box-Provisioner". We also want to set the region of this VM to the same as we did for our resource group.
+* We want to name our first VM something that will make it easy to identify, so I have named mine "Jump-Box". We also want to set the region of this VM to the same as we did for our resource group.
 * For the "Image" selection, we will select the Ubuntu Server 18.04 option, and for the "Size" we can use the "Standard - B1s" which will have 1 CPU and 1 RAM, enough power for what we need in this VM.
 * Next, down where it says "Authentication Type" we want o make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
  ###### We get this by going back to our terminal and running the command, cat ~/.ssh./id_rsa.pub, which should display our public key.
@@ -80,43 +80,43 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 We want to configure our Jumpbox now by adding some rules to the security group we created. 1st we wanted to make sure that we allowed our IP address to be able to SSH to our Jumpbox VM.
 * We created an inbound rule selecting IP Addresses as a source, the source IP being our public IP, any source port ranges, selecting IP as the destination, destination port range should be port 22 for SSH connection, and the destination IP being the private IP of our Jumpbox.
 * Reminder, we need to set the priority lower than our default deny rule, lower than 4096, and this rule should allow all traffic from our source IP.
-After you complete this rule, you can test the rule by powering up you Jumpbox VM, and in your terminal running the command *ssh admin-username@VM-public-IP*
+After you complete this rule, you can test the rule by powering up you Jumpbox VM, and in your terminal running the command **ssh admin-username@VM-public-IP**
 ###### The VM's public IP should be listed in Azure when you select the VM.
 ###### Our public IP might change depending on wi-fi settings or what wi-fi networks we are connected to, so if you have issues down the line connecting, you may want to double check this and see if your rule may need editing.
 
 ## Setting Up Containers
 We want to configure our Jumpbox further by allowing it to run containers from Docker and install these containers. 
-###### Make sure to install docker in your terminal if it is not already, run *sudo apt install docker.io*. Then verify it is running with *sudo systemctl status docker*. If it is not running, use *sudo systemctl start docker*.
-* Now we want to use the Ansible container so we will run *sudo docker pull cyberxsecurity/ansible* to locate and pull that container from docker.
-* Now to launch Ansible we use *docker run -ti cyberxsecurity/ansible:latest bash*. We can exit after we run this command.
+###### Make sure to install docker in your terminal if it is not already, run **sudo apt install docker.io**. Then verify it is running with **sudo systemctl status docker**. If it is not running, use **sudo systemctl start docker**.
+* Now we want to use the Ansible container so we will run **sudo docker pull cyberxsecurity/ansible** to locate and pull that container from docker.
+* Now to launch Ansible we use **docker run -ti cyberxsecurity/ansible:latest bash**. We can exit after we run this command.
 We now want to make sure that our Jumpbox can SSH in our virtual network we created, so we will create a new inbound rule in our virtual network.
 * The source should be IP Addresses again, and we will input the private IP of our Jumpbox, we can once again find this by selecting on our Jumpbox VM in Azure.
 * Source port ranges will be Any again, the destination will VirtualNetwork this time, and destination port will be 22 for SSH again.
 * Protocol will be any, action will be allow to allow traffic, make priority another lower number than our Default Deny rule, and create another name for this rule to make it easy to tell what it is doing for our cloud network.
 
 ## Setting Up Provisioners
-We will be jumping back into our terminal to start setting up our provisioners.
-* We want to run *sudo docker container list -a* to list our our ansible containers. We will run *docker run -it cyberxsecurity/ansible /bin/bash* next to start it up and connect to it. This should drop us into another shell.
-* We want to next create another SSH key pair to allow secure access. In our new container shell run the *ssh-keygen* command again, and then *ls .ssh/* to list them out.
-* We will cat out our public key again using *cat .ssh/id_rsa.pub* and we want to copy this key again.
+We will be jumping back into our terminal to start setting up our provisioners in the form of YAML files. This will allow us to do configuration and installations much more efficiently down the line, but allowing us to just run a file to do so. 
+* We want to run **sudo docker container list -a** to list our our ansible containers. We will run **docker run -it cyberxsecurity/ansible /bin/bash** next to start it up and connect to it. This should drop us into another shell.
+* We want to next create another SSH key pair to allow secure access. In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
+* We will cat out our public key again using **cat .ssh/id_rsa.pub** and we want to copy this key again.
 * Back in Azure, we will select our Web-1 VM and we want to make sure we are using these keys to verify access when we SSH. In the Reset password tab, we select Reset SSH public key instead, use our username, RedAdmin in our case, and paste the public key.
 * We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
 Next we need to do some further configuring to our Ansible containers.
-* Navigate to the ansible file with *ls /etc/ansible*. We will open the hosts file with nano, and Web-1's private IP to the file headers.
-###### Uncomment the *webservers* header and add it there, along with this python line, *ansible_python_interpreter=/usr/bin/python3*
+* Navigate to the ansible file with **ls /etc/ansible**. We will open the hosts file with nano, and Web-1's private IP to the file headers.
+###### Uncomment the **webservers** header and add it there, along with this python line, **ansible_python_interpreter=/usr/bin/python3**
 We now want to make sure our admin account will be used for SSH connections.
 * Navigate to the ansible.cfg file and add your admin account name to the *remote_user =* portion. 
+* You should now be able to run **ansible-playbook [name of your playbook YAML file]**.
 
 ## DVWA
 We now wanto establish DVWA web app on our VM's.
-* If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use *docker container list -a* to list out our containers. We will connect to the ansible container by running *docker start [name of container]* to start it up, and then *docker attach [name of container]* to connect. 
+* If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use **docker container list -a** to list out our containers. We will connect to the ansible container by running **docker start [name of container]** to start it up, and then **docker attach [name of container]** to connect. 
 * We will create a playbook within the ansible file, to configure within, and it will be a YAML file.
-[Yaml header screenshot]
 * We want our full playbook to look like the image below.
 
  ![image](https://user-images.githubusercontent.com/78758609/121428185-c1afbe00-c932-11eb-9ed8-0cb662c8ffc7.png)
 
 ###### This will make sure it downloads python3-pip, docker.io, the cyberxsecurity/dvwa docker container, and it will make sure that when you restart your VM that the container will restart too.
 
-* We can test everything is running correctly by trying to SSH to container and running the command *curl localhost/setup.php*. 
+* We can test everything is running correctly by trying to SSH to container and running the command **curl localhost/setup.php**. 
 
