@@ -146,4 +146,8 @@ We want to implement the ELK stack into our cloud network now so that we can hav
 
 ## Our ELK VM
 After setting up the peering between the networks, we want to create a new VM that will host our ELK tools.
-* We will start back in our terminal
+* Back in our terminal, we want to SSH into our Jumpbox, then start and connect to our Ansible container.
+* We then want to get our public key again and copy it for later.
+* In Azure we will create a new VM for our ELK Stack, and make sure to add this key in the configuration like before.
+* This VM should be in the same resource group again, should have a size of at least 4gb of RAM, should have a public IP, and be connected to our new ELK virtual network.
+* 
