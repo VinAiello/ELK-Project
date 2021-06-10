@@ -86,7 +86,7 @@ After you complete this rule, you can test the rule by powering up you Jumpbox V
 
 ## Setting Up Containers
 We want to configure our Jumpbox further by allowing it to run containers from Docker and install these containers. 
-###### Make sure to install docker in your terminal if it is not already, run **sudo apt install docker.io**. Then verify it is running with **sudo systemctl status docker**. If it is not running, use **sudo systemctl start docker**.
+###### Make sure to install docker in your terminal if it is not already, run "*sudo apt install docker.io*". Then verify it is running with "*sudo systemctl status docker*". If it is not running, use "*sudo systemctl start docker*".
 * Now we want to use the Ansible container so we will run **sudo docker pull cyberxsecurity/ansible** to locate and pull that container from docker.
 * Now to launch Ansible we use **docker run -ti cyberxsecurity/ansible:latest bash**. We can exit after we run this command.
 We now want to make sure that our Jumpbox can SSH in our virtual network we created, so we will create a new inbound rule in our virtual network.
@@ -103,9 +103,9 @@ We will be jumping back into our terminal to start setting up our provisioners i
 * We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
 Next we need to do some further configuring to our Ansible containers.
 * Navigate to the ansible file with **ls /etc/ansible**. We will open the hosts file with nano, and Web-1's private IP to the file headers.
-###### Uncomment the **webservers** header and add it there, along with this python line, **ansible_python_interpreter=/usr/bin/python3**
+###### Uncomment the "*webservers*" header and add it there, along with this python line, "*ansible_python_interpreter=/usr/bin/python3*"
 We now want to make sure our admin account will be used for SSH connections.
-* Navigate to the ansible.cfg file and add your admin account name to the *remote_user =* portion. 
+* Navigate to the ansible.cfg file and add your admin account name to the **remote_user =** portion. 
 * You should now be able to run **ansible-playbook [name of your playbook YAML file]**.
 
 ## DVWA
