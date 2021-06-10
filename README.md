@@ -121,3 +121,11 @@ We now wanto establish DVWA web app on our VM's.
 * We can test everything is running correctly by trying to SSH to container and running the command **curl localhost/setup.php**. 
 
 ## Load Balancers
+The next step is getting our load balancers set up to help support our DVWA.
+* In Azure there will be an option to create Load Balancers, and we want to make sure to connect it to our same resource group, RedTeamRG, and we want it in the same region again.
+* For "**Type**" we'll select Static, and for "**SKU**" we will select Basic.
+* We want our load balancer to have it's on IP address so we will select create new, and we can give the IP address name the same name we have given the load balancer to keep it simple.
+* "**Assignment**" will be Static and we will not need an IPv6 address for it.
+* Atfer the load balancer has been reviewed and created, we will want to help it monitor that our VM's are able to receive traffic, so we will add a health probe to it.
+* Next we will add a backend pool to connect our VM servers to the load balancer, specifying that they will have the traffic balanced between them. We want to make sure it is connected to the virtual network we created previously and that we are specifying the private IP's of our Web-1 and Web-2 VM's.
+* 
