@@ -150,4 +150,7 @@ After setting up the peering between the networks, we want to create a new VM th
 * We then want to get our public key again and copy it for later.
 * In Azure we will create a new VM for our ELK Stack, and make sure to add this key in the configuration like before.
 * This VM should be in the same resource group again, should have a size of at least 4gb of RAM, should have a public IP, and be connected to our new ELK virtual network.
-* 
+* We will also be configuring this VM with SSH key authenticating, so once again paste the public key we generated and place it in the required area, and we will be allowing port 22 for SSH again.
+
+## Our ELK Container
+
