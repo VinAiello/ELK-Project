@@ -187,3 +187,10 @@ We now want to create another playbook, which we can name **filebeat-playbook** 
 * We can now run "**ansible-playbook filebeat-playbook.yml**" to run the playbook, and then you can verify in Kibana that Filebeat is working correctly by clicking the "**Check Data**" button at the bottom of the DEB page.
 
 ## Metricbeat
+Metricbeat will hep us collect metrics and analytics for our network and communicates them with the Elasticsearch and Logstash parts of our ELK Stack.
+###### The steps for this will actually be identical to the steps for installing Filebeat with a couple variations listed below.
+* In our Kibana webpage, instead of going to "Add Log Data". we will go to where it says "**Add Metric Data**" and then navigate to "**Docker Metrics**".
+###### This will bring us to a set of steps similar to the Filebeat steps.
+* When you get to the portion to download and edit the Filebeat configuration file, we want to use this link instead **https://gist.githubusercontent.com/slape/58541585cc1886d2e26cd8be557ce04c/raw/0ce2c7e744c54513616966affb5e9d96f5e12f73/metricbeat**.
+
+## Conclusion
