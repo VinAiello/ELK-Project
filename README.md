@@ -170,3 +170,4 @@ We now want to make some changes to control the access to our ELK server.
 ###### It should be *nameofyourVM-nsg*. 
 * Our ELK stack will run over port 5601 so we want to the incoming rule that we are making to allow TCP traffic from our public IP through that port.
 * Source should be from our public IP address to the VirtualNetwork, with destination port being 5601.
+* We can now verify our access by going to the website for our ELK stack, the Kibana tool specifically as it is the visualization portion of the stack, http://[your.ELK-VM.External.IP]:5601/app/kibana.
