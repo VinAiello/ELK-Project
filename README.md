@@ -185,3 +185,5 @@ We now want to create another playbook, which we can name **filebeat-playbook** 
 
 ![filebeat config](https://user-images.githubusercontent.com/78758609/121739856-d7072280-cac1-11eb-8b3b-1e1f6e53f02d.png)
 * We can now run "**ansible-playbook filebeat-playbook.yml**" to run the playbook, and then you can verify in Kibana that Filebeat is working correctly by clicking the "**Check Data**" button at the bottom of the DEB page.
+
+## Metricbeat
