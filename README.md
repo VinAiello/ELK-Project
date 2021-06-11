@@ -174,3 +174,8 @@ We now want to make some changes to control the access to our ELK server.
 
 ## Filebeat
 We want to install and add Filebeat to help us with filtering and logging the data that we collect in our ELK Stack. We will be downloading this on our DVWA container.
+* In our browser, at our ELK VM's IP address, we will go to the "**Add Log Data**" option in Kibana and then click on the "**System Logs**" option. We want to choose the "**DEB**" which will guide you to correctly install Filebeat on Linux.
+After following the guide in Kibana, we want to now create a Filebeat configuration file, along with a playbook for Filebeat.
+* We will SSH from our Ansible container into our ELK server VM and we can actually run this command to get a template for the config file, "**curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat >> /etc/ansible/filebeat-config.yml**".
+* We will go into this config file now and go specifically to line #1106, which should say "**hosts**", and we want to type in, in brackets, ["ELK VM's IP addres:9200"].
+* 
