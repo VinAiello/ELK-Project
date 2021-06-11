@@ -163,4 +163,10 @@ Now we want to add our VM to our "**Hosts**" file like before, adding the line "
 
 ![Ansible config fiel snippet](https://user-images.githubusercontent.com/78758609/121706226-09515980-ca9b-11eb-8c5e-ead8a26849ff.png)
 * After we run the playbook, we can verify everything is working by SSHing from our container to the ELK VM.
-* 
+
+## ELK Access
+We now want to make some changes to control the access to our ELK server.
+* After the creation of our ELK VM, there should have a security group auto-generated for it. This is where we will be creating access rules.
+###### It should be *nameofyourVM-nsg*. 
+* Our ELK stack will run over port 5601 so we want to the incoming rule that we are making to allow TCP traffic from our public IP through that port.
+* Source should be from our public IP address to the VirtualNetwork, with destination port being 5601.
