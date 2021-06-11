@@ -154,7 +154,9 @@ After setting up the peering between the networks, we want to create a new VM th
 
 ## Our ELK Container
 Now we want to add our VM to our "**Hosts**" file like before and create a new provisioner playbook to configure the VM for us.
-* When creating our new YAML playbook file, we want to use the same confirguation we did for our last playbook, but with a couple additions. 
+* When creating our new YAML playbook file, we want to use the same confirguation we did for our last playbook, downloading docker, docker.io, and python3-pip but with a couple additions. 
 
 ![Elk docker header](https://user-images.githubusercontent.com/78758609/121700423-824db280-ca95-11eb-892a-f566aad99a5e.png)
 ![Docker increase size snippet](https://user-images.githubusercontent.com/78758609/121700445-88dc2a00-ca95-11eb-98b4-361ea9e6fa91.png)
+* In the first snippet above, you want to make sure to substitute the remote username with whatever username you have been using up to this point. The second snippet is used to help increase the memory since our ELK container will require more.
+* 
