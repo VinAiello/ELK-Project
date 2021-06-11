@@ -163,3 +163,4 @@ Now we want to add our VM to our "**Hosts**" file like before, adding the line "
 
 ![Ansible config fiel snippet](https://user-images.githubusercontent.com/78758609/121706226-09515980-ca9b-11eb-8c5e-ead8a26849ff.png)
 * After we run the playbook, we can verify everything is working by SSHing from our container to the ELK VM.
+* 
