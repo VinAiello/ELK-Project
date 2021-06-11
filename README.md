@@ -17,7 +17,7 @@ Integrating the ELK server into our network provides very useful monitoring and 
 
 | Name  | Function   | IP Address  | Operating System  |
 |---|---|---|---|
-|  JumpBox Provisioner | Gateway   | 10.0.0.6  |  Linux |
+|  JumpBox | Gateway VM   | 10.0.0.6  |  Linux |
 | Web 1  |  Container | 10.0.0.7  | Linux  |
 | Web 2  |  Container | 10.0.0.8  | Linux |
 |Elk Server | ELK Stack | 10.1.0.4 | Linux |
@@ -171,3 +171,6 @@ We now want to make some changes to control the access to our ELK server.
 * Our ELK stack will run over port 5601 so we want to the incoming rule that we are making to allow TCP traffic from our public IP through that port.
 * Source should be from our public IP address to the VirtualNetwork, with destination port being 5601.
 * We can now verify our access by going to the website for our ELK stack, the Kibana tool specifically as it is the visualization portion of the stack, http://[your.ELK-VM.External.IP]:5601/app/kibana.
+
+## Filebeat
+We want to install and add Filebeat to help us with filtering and logging the data that we collect in our ELK Stack. We will be downloading this on our DVWA container.
