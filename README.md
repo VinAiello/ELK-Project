@@ -177,5 +177,11 @@ We want to install and add Filebeat to help us with filtering and logging the da
 * In our browser, at our ELK VM's IP address, we will go to the "**Add Log Data**" option in Kibana and then click on the "**System Logs**" option. We want to choose the "**DEB**" which will guide you to correctly install Filebeat on Linux.
 After following the guide in Kibana, we want to now create a Filebeat configuration file, along with a playbook for Filebeat.
 * We will SSH from our Ansible container into our ELK server VM and we can actually run this command to get a template for the config file, "**curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat >> /etc/ansible/filebeat-config.yml**".
-* We will go into this config file now and go specifically to line #1106, which should say "**hosts**", and we want to type in, in brackets, ["ELK VM's IP addres:9200"].
-* 
+* We will go into this config file now and go specifically to line #1106, which should say "**hosts**", and we want to type in, in brackets, **["ELK VM's Private IP address:9200"]**.
+* At line #1806, similarly after hosts, input **["ELK VM's PrivateIP address:5601"]**.
+We now want to create another playbook, which we can name **filebeat-playbook** which will be used to instal FIlebeat and also copy the config file we just made.
+* We can now download the .deb file from this link, https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb , and run it using this command "**dpkg -i filebeat-7.4.0-amd64.deb**". We want to now make a copy of the config file and make sure it is placed in our Filebeat directory.
+* Our new filebeat playbook YAML should look like below.
+
+![filebeat config](https://user-images.githubusercontent.com/78758609/121739856-d7072280-cac1-11eb-8b3b-1e1f6e53f02d.png)
+
