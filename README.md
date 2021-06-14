@@ -95,10 +95,11 @@ We now want to make sure that our Jumpbox can SSH in our virtual network we crea
 ## Setting Up Provisioners
 We will be jumping back into our terminal to start setting up our provisioners in the form of YAML files. This will allow us to do configuration and installations much more efficiently down the line, but allowing us to just run a file to do so. 
 * We want to run **sudo docker container list -a** to list our our ansible containers. We will run **docker run -it cyberxsecurity/ansible /bin/bash** next to start it up and connect to it. This should drop us into another shell.
-* We want to next create another SSH key pair to allow secure access and essentially letting our containers run off of Web-1 and Web-2 In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
+* We want to next create another SSH key pair to allow secure access and essentially letting our containers run off of Web-1 and Web-2. In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
 * We will cat out our public key again using **cat .ssh/id_rsa.pub** and we want to copy this key again.
 * Back in Azure, we will select our Web-1 VM and we want to make sure we are using these keys to verify access when we SSH. In the Reset password tab, we select Reset SSH public key instead, use our username, RedAdmin in our case, and paste the public key.
 * We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
+* Repeat these steps for Web-2 as well.
 Next we need to do some further configuring to our Ansible containers.
 * Navigate to the ansible file with **ls /etc/ansible**. We will open the hosts file with nano, and Web-1's private IP to the file headers.
 ###### Uncomment the "*webservers*" header and add it there, along with this python line, "*ansible_python_interpreter=/usr/bin/python3*"
