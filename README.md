@@ -192,3 +192,16 @@ Metricbeat will hep us collect metrics and analytics for our network and communi
 * When you get to the portion to download and edit the Filebeat configuration file, we want to use this link instead **https://gist.githubusercontent.com/slape/58541585cc1886d2e26cd8be557ce04c/raw/0ce2c7e744c54513616966affb5e9d96f5e12f73/metricbeat**.
 
 ## Conclusion
+in this project we successfully established the following:
+1. Creating a cloud hosted network.
+2. Creating a resource group that we were able to establish the rest of our resources within.
+3. Creating a virtual network within out resource group.
+4. Create a security group where we established access policies for the virtual machines we later created.
+5. Establishing a Jumpbox virtual machine that we used to funnel traffic and access through.
+6. Establish 2 additional VM's, later used for our DVWA and containers.
+7. Set up load balancers to help with accessibility and traffic distribution.
+8. Creating a series of provisioners in the form of YAML files, used for efficient configuration.
+9. Establishing another virtual network for the ELK stack we would implement next.
+10. Establish another VM used as a server for our Elk stack.
+11. Successfully install and configure our ELK stack for proper implementation within our Azure network.
+12. Install and implemented Filebeat and Metricbeat to be used for analytics, logging, and monitoring.
