@@ -63,7 +63,7 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 * We want to make sure we are placing this VM in our previously made resource group, so in that option make sure we specify our RedTeamRG. 
 * We want to name our first VM something that will make it easy to identify, so I have named mine "Jump-Box". We also want to set the region of this VM to the same as we did for our resource group.
 * For the "Image" selection, we will select the Ubuntu Server 18.04 option, and for the "Size" we can use the "Standard - B1s" which will have 1 CPU and 1 RAM, enough power for what we need in this VM.
-* Next, down where it says "Authentication Type" we want o make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
+* Next, down where it says "Authentication Type" we want to make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
  ###### We get this by going back to our terminal and running the command, cat ~/.ssh./id_rsa.pub, which should display our public key.
 * We can ignore the port settings, as they will be configured by our security group.
 * In the Networking tab, we want to select the virtual network we created, RedTeamNet, which will assign our VM a Private IP address, and we will keep the Public IP as default.
@@ -95,7 +95,7 @@ We now want to make sure that our Jumpbox can SSH in our virtual network we crea
 ## Setting Up Provisioners
 We will be jumping back into our terminal to start setting up our provisioners in the form of YAML files. This will allow us to do configuration and installations much more efficiently down the line, but allowing us to just run a file to do so. 
 * We want to run **sudo docker container list -a** to list our our ansible containers. We will run **docker run -it cyberxsecurity/ansible /bin/bash** next to start it up and connect to it. This should drop us into another shell.
-* We want to next create another SSH key pair to allow secure access. In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
+* We want to next create another SSH key pair to allow secure access and essentially letting our containers run off of Web-1 and Web-2 In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
 * We will cat out our public key again using **cat .ssh/id_rsa.pub** and we want to copy this key again.
 * Back in Azure, we will select our Web-1 VM and we want to make sure we are using these keys to verify access when we SSH. In the Reset password tab, we select Reset SSH public key instead, use our username, RedAdmin in our case, and paste the public key.
 * We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
