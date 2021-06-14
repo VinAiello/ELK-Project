@@ -1,7 +1,7 @@
 # ELK-Project
 ## The diagram below is a depiction of the network we created in this repository.
 
-[Uploading ELK Project Diagram (2).drawio…]()
+![ELK Project Diagram](https://user-images.githubusercontent.com/78758609/121825707-1b84f080-cc71-11eb-890e-6eca00663a03.PNG)
 
 ## Topology of our Network
 In this project, we created a cloud hosted network via Microsoft Azure, where also established a load balancer between VM's, and a DVWA that was powered by these VM's, along with containers delivered through Docker.
