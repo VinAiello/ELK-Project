@@ -22,7 +22,7 @@ Integrating the ELK server into our network provides very useful monitoring and 
 
 ## Access Policies
 We set up our virtual machines in a way in which only the Jumpbox would be allowed connections to the internet, so our Web 1 and Web 2 machines are more secure.
-* Our containers within our Web 1 and Web 2 machines are only accessible by our Jumpbox host machine.
+* Our containers hosted on our Web 1 and Web 2 machines are only accessible by our Jumpbox host machine.
 * Our ELK Server is only accessible by our containers.
 
 | Name  | Publicly Accessible | Allowed IP Addresses  |
@@ -62,12 +62,12 @@ Our first VM that we will set up will be our JumpBox and it will be our gateway 
 * Now in Azure, we want to search for the "Virtual Machine" option and click "Add" so that we can start our first machine.
 * We want to make sure we are placing this VM in our previously made resource group, so in that option make sure we specify our RedTeamRG. 
 * We want to name our first VM something that will make it easy to identify, so I have named mine "Jump-Box". We also want to set the region of this VM to the same as we did for our resource group.
-* For the "Image" selection, we will select the Ubuntu Server 18.04 option, and for the "Size" we can use the "Standard - B1s" which will have 1 CPU and 1 RAM, enough power for what we need in this VM.
+* For the "Image" selection, we will select the Ubuntu Server 18.04 option, and for the "Size" we can use the "Standard - B1s" which will have 1 CPU and 1 RAM, enough power for what we need in this VM. This is basically configuring the virtual VM server using a copy of a certain version type of server.
 * Next, down where it says "Authentication Type" we want to make sure we select "SSH Key" since this is how we will validating the connection and accessing our cloud server. We can create a username to use to login in with, in my case I used RedAdmin, and then in the window we paste our public key we generated before.
  ###### We get this by going back to our terminal and running the command, cat ~/.ssh./id_rsa.pub, which should display our public key.
 * We can ignore the port settings, as they will be configured by our security group.
 * In the Networking tab, we want to select the virtual network we created, RedTeamNet, which will assign our VM a Private IP address, and we will keep the Public IP as default.
-* We want to make sure we are selecting the "Advanced" option in the area that asks for "NIC ntwork security group" and select the security group we created, RedTeam-SG, for our VM to be a part of.
+* We want to make sure we are selecting the "Advanced" option in the area that asks for "NIC network security group" and select the security group we created, RedTeam-SG, for our VM to be a part of.
 * We can keep the rest of the settings as default, and finish with Review and Create again to finalize the VM. 
 * For our other 2 VM's we will make, named Web-1 & Web-2, we will be doing the same steps for each except for a couple variations:
 1. In the drop down for "Availability Options" we want to select "Availability Set" this time, then click "Create New". We will keep the default options and then name is RedTeamAS.
@@ -83,9 +83,10 @@ After you complete this rule, you can test the rule by powering up you Jumpbox V
 ###### Our public IP might change depending on wi-fi settings or what wi-fi networks we are connected to, so if you have issues down the line connecting, you may want to double check this and see if your rule may need editing.
 
 ## Setting Up Containers
-We want to configure our Jumpbox further by allowing it to run containers from Docker and install these containers. 
-###### Make sure to install docker in your terminal if it is not already, run "*sudo apt install docker.io*". Then verify it is running with "*sudo systemctl status docker*". If it is not running, use "*sudo systemctl start docker*".
-* Now we want to use the Ansible container so we will run **sudo docker pull cyberxsecurity/ansible** to locate and pull that container from docker.
+We want to configure our Jumpbox further by allowing it to run containers from Docker, which is a container tool that will provide images or copies of certain containers and allow us to install these containers on our VM's connected to the Jumpbox. 
+###### Make sure to install Docker in your terminal if it is not already, run "*sudo apt install docker.io*". Then verify it is running with "*sudo systemctl status docker*". If it is not running, use "*sudo systemctl start docker*".
+* Now we want to use the Ansible provisioner tool so we will run **sudo docker pull cyberxsecurity/ansible** to locate and pull it from Docker.
+###### Ansible is a provisioner tool which will allowus to use different IaC, such as the containers we will pull from Docker. It will allow us to quickly configure our containers so they are ready for use and specific functions.
 * Now to launch Ansible we use **docker run -ti cyberxsecurity/ansible:latest bash**. We can exit after we run this command.
 We now want to make sure that our Jumpbox can SSH in our virtual network we created, so we will create a new inbound rule in our virtual network.
 * The source should be IP Addresses again, and we will input the private IP of our Jumpbox, we can once again find this by selecting on our Jumpbox VM in Azure.
@@ -94,14 +95,14 @@ We now want to make sure that our Jumpbox can SSH in our virtual network we crea
 
 ## Setting Up Provisioners
 We will be jumping back into our terminal to start setting up our provisioners in the form of YAML files. This will allow us to do configuration and installations much more efficiently down the line, but allowing us to just run a file to do so. 
-* We want to run **sudo docker container list -a** to list our our ansible containers. We will run **docker run -it cyberxsecurity/ansible /bin/bash** next to start it up and connect to it. This should drop us into another shell.
-* We want to next create another SSH key pair to allow secure access and essentially letting our containers run off of Web-1 and Web-2. In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
+* While in our Jumpbox shell, we want to run **sudo docker container list -a** to list our our Ansible containers. We will run **docker run -it cyberxsecurity/ansible /bin/bash** next to start it up and connect to it. This should drop us into another shell, our container shell within our Web-1 or Web-2 server.
+* We want to next create another SSH key pair to allow secure access and essentially let our containers run off of Web-1 and Web-2. In our new container shell run the **ssh-keygen** command again, and then **ls .ssh/** to list them out.
 * We will cat out our public key again using **cat .ssh/id_rsa.pub** and we want to copy this key again.
 * Back in Azure, we will select our Web-1 VM and we want to make sure we are using these keys to verify access when we SSH. In the Reset password tab, we select Reset SSH public key instead, use our username, RedAdmin in our case, and paste the public key.
 * We can test the connection by pinging Web-1's private IP, and then SSH to the private IP. Make sure to exit afterwards.
 * Repeat these steps for Web-2 as well.
 Next we need to do some further configuring to our Ansible containers.
-* Navigate to the ansible file with **ls /etc/ansible**. We will open the hosts file with nano, and Web-1's private IP to the file headers.
+* Navigate to the Ansible file with **ls /etc/ansible**. We will open the hosts file with nano, and Web-1's private IP to the file headers.
 ###### Uncomment the "*webservers*" header and add it there, along with this python line, "*ansible_python_interpreter=/usr/bin/python3*"
 We now want to make sure our admin account will be used for SSH connections.
 * Navigate to the ansible.cfg file and add your admin account name to the **remote_user =** portion. 
@@ -110,7 +111,7 @@ We now want to make sure our admin account will be used for SSH connections.
 ## DVWA
 We now wanto establish DVWA web app on our VM's.
 * If we are not already connected to our Ansible container, make sure we are connected to our Jumpbox and then use **docker container list -a** to list out our containers. We will connect to the ansible container by running **docker start [name of container]** to start it up, and then **docker attach [name of container]** to connect. 
-* We will create a playbook within the ansible file, to configure within, and it will be a YAML file.
+* We will create a playbook within the Ansible file, to configure within, and it will be a YAML file.
 * We want our full playbook to look like the image below.
 
  ![image](https://user-images.githubusercontent.com/78758609/121428185-c1afbe00-c932-11eb-9ed8-0cb662c8ffc7.png)
@@ -123,7 +124,7 @@ We now wanto establish DVWA web app on our VM's.
 The next step is getting our load balancers set up to help support our DVWA.
 * In Azure there will be an option to create Load Balancers, and we want to make sure to connect it to our same resource group, RedTeamRG, and we want it in the same region again.
 * For "**Type**" we'll select Static, and for "**SKU**" we will select Basic.
-* We want our load balancer to have it's on IP address so we will select create new, and we can give the IP address name the same name we have given the load balancer to keep it simple.
+* We want our load balancer to have it's own IP address so we will select create new, and we can give the IP address name the same name we have given the load balancer to keep it simple.
 * "**Assignment**" will be Static and we will not need an IPv6 address for it.
 * Atfer the load balancer has been reviewed and created, we will want to help it monitor that our VM's are able to receive traffic, so we will add a health probe to it.
 * Next we will add a backend pool to connect our VM servers to the load balancer, specifying that they will have the traffic balanced between them. We want to make sure it is connected to the virtual network we created previously and that we are specifying the private IP's of our Web-1 and Web-2 VM's.
@@ -135,6 +136,7 @@ We want to make a few more security measures to ensure proper access is allowed 
 * We can now delete our **Default Deny** rule now that we have put in enough rules and configuration to provide sufficient access and control. 
 * We can now test that our DVWA is accessible on the internet by running "**http://[load balancer public IP]/setup.php**" in a browser.
 * We can then test that our load balancer and backened pool are working by shutting down our Web-1 VM and trying to load the link, and then again having Web-1 back on and shutting down our Web-2 VM.
+###### When one shuts down, the other VM should be able to pick up the slack since our DVWA is hosted on both machines. With both being placed in our backend pool, it should prompt the load balancer to delegate traffic between the 2 machines evenly or through 1 entirely if the other is down or experiencing some sort of issues.
 
 ## Starting Our ELK Stack
 We want to implement the ELK stack into our cloud network now so that we can have access to logging of data, analytics, and monitoring of our network. We will start by creating another virtual network to host the stack on.
@@ -148,7 +150,7 @@ After setting up the peering between the networks, we want to create a new VM th
 * Back in our terminal, we want to SSH into our Jumpbox, then start and connect to our Ansible container.
 * We then want to get our public key again and copy it for later.
 * In Azure we will create a new VM for our ELK Stack, and make sure to add this key in the configuration like before.
-* This VM should be in the same resource group again, should have a size of at least 4gb of RAM, should have a public IP, and be connected to our new ELK virtual network.
+* This VM should be in the same resource group again, should have a size of at least 4gb of RAM when selecting the Image we want to use, should have a public IP, and be connected to our new ELK virtual network.
 * We will also be configuring this VM with SSH key authenticating, so once again paste the public key we generated and place it in the required area, and we will be allowing port 22 for SSH again.
 
 ## Our ELK Container
@@ -186,7 +188,7 @@ We now want to create another playbook, which we can name **filebeat-playbook** 
 * We can now run "**ansible-playbook filebeat-playbook.yml**" to run the playbook, and then you can verify in Kibana that Filebeat is working correctly by clicking the "**Check Data**" button at the bottom of the DEB page.
 
 ## Metricbeat
-Metricbeat will hep us collect metrics and analytics for our network and communicates them with the Elasticsearch and Logstash parts of our ELK Stack.
+Metricbeat will hep us collect metrics and analytics for our network and communicates them with the Elasticsearch and Logstash parts of our ELK Stack, and also allow us to parse through specific information gathered.
 ###### The steps for this will actually be identical to the steps for installing Filebeat with a couple variations listed below.
 * In our Kibana webpage, instead of going to "Add Log Data". we will go to where it says "**Add Metric Data**" and then navigate to "**Docker Metrics**".
 ###### This will bring us to a set of steps similar to the Filebeat steps.
